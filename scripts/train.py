@@ -107,7 +107,7 @@ def _print_progress(episode: int, win_history: list[str | None], cop: QTableActo
     """
     cop_wins = sum(1 for w in win_history if w == "cop")
     rate = cop_wins / len(win_history) if win_history else 0.0
-    print(f"  ep {episode:>7,}  cop_win%={rate:.1%}  ε={cop.epsilon:.4f}")
+    print(f"  ep {episode:>7,}  cop_win%={rate:.1%}  eps={cop.epsilon:.4f}")
 
 
 def train() -> None:
