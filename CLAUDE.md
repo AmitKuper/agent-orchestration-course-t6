@@ -71,6 +71,17 @@ Always commit `uv.lock` alongside `pyproject.toml`.
 - Track token usage in `docs/cost.md`. Update `docs/TODO.md` after every session.
 - Zero Ruff violations: `uv run ruff check .`
 
+## Claude Code Rules (`.claude/rules/`)
+
+The `.claude/rules/` folder at the repo root is a **copy** of `hw6-common/.claude/rules/` — these
+are loaded automatically by Claude Code when working in this repo. They are not auto-synced; if
+the common repo updates its rules, re-copy manually:
+
+```bash
+cp -r hw6-common/.claude/rules .claude/
+git add .claude/ && git commit -m "Docs: sync .claude/rules from hw6-common"
+```
+
 ## Submodule Rules
 
 - **Never push to `hw6-common/`** — it is a read-only reference to the shared repo.
