@@ -1,0 +1,1 @@
+"""Test suite for actor_t6."""

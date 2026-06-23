@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "actor-t6"
+version = "0.1.0"
+description = "Group A (Team 6) Actor — Q-table RL backend for Cop & Thief"
+requires-python = ">=3.11"
+dependencies = [
+    "cop-thief-game",
+    "numpy>=1.26",
+]
+
+[tool.uv.sources]
+cop-thief-game = { path = "./hw6-common" }
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/actor_t6"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "ANN", "D"]
+ignore = ["D203", "D213", "ANN101", "ANN102"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short -q"
+pythonpath = ["src", "hw6-common/src"]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.coverage.run]
+source = ["src/actor_t6"]
+
+[tool.coverage.report]
+fail_under = 85
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+]
