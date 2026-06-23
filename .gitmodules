@@ -1,0 +1,3 @@
+[submodule "hw6-common"]
+	path = hw6-common
+	url = https://github.com/AmitKuper/agent-orchestration-course-t6-common.git
