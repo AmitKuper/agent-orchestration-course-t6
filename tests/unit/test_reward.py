@@ -59,15 +59,15 @@ def test_cop_trapped() -> None:
 # --- Step reward ---
 
 def test_step_reward_cop() -> None:
-    """Cop receives -0.1 per non-terminal step."""
+    """Cop receives -0.5 per non-terminal step (pressure to capture quickly)."""
     r = _result()
-    assert compute_reward(r, "cop") == pytest.approx(-0.1)
+    assert compute_reward(r, "cop") == pytest.approx(-0.5)
 
 
 def test_step_reward_thief() -> None:
-    """Thief receives +0.1 per non-terminal step."""
+    """Thief receives +1.0 per non-terminal step (survival signal on scale with -20 capture)."""
     r = _result()
-    assert compute_reward(r, "thief") == pytest.approx(0.1)
+    assert compute_reward(r, "thief") == pytest.approx(1.0)
 
 
 # --- Failure penalty ---

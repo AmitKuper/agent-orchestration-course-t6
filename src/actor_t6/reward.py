@@ -30,7 +30,10 @@ _TERMINAL: dict[str, dict[str, float]] = {
 }
 
 # Per-step rewards (applied on every non-terminal successful action).
-_STEP: dict[str, float] = {COP: -0.1, THIEF: 0.1}
+# Thief: +1.0/step makes surviving 25 rounds worth +25 before discounting,
+# comparable in scale to the -20 capture penalty so the signal is meaningful.
+# Cop: -0.5/step pressures it to capture quickly rather than drift.
+_STEP: dict[str, float] = {COP: -0.5, THIEF: 1.0}
 
 # Penalty for illegal / failed actions.
 _FAIL_PENALTY: float = -5.0

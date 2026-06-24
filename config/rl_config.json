@@ -9,5 +9,6 @@
   "epsilon_decay": 0.999985,
   "epsilon_min": 0.05,
   "checkpoint_interval": 10000,
-  "model_save_path": "models/"
+  "model_save_path": "models/",
+  "distance_shaping_coeff": 2.0
 }
