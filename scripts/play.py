@@ -82,11 +82,11 @@ def play() -> None:
     print(f"  Seed: {seed}  |  Cop starts at {cop_pos}  |  Thief starts at {thief_pos}")
     print("  Type a direction (N NE E SE S SW W NW) or BARRIER (cop only). 'q' to quit.\n")
 
-    # cop always moves first
+    # thief moves first each round (PRD §turn order)
     turn_order = (
-        [("cop", human, True), ("thief", actor, False)]
-        if human_role == "cop"
-        else [("cop", actor, False), ("thief", human, True)]
+        [("thief", human, True), ("cop", actor, False)]
+        if human_role == "thief"
+        else [("thief", actor, False), ("cop", human, True)]
     )
 
     done = False
