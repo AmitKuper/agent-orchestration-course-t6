@@ -22,3 +22,7 @@ htmlcov/
 # OS
 .DS_Store
 Thumbs.db
+
+# Match run output files
+match_out.txt
+match_err.txt
