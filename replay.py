@@ -60,9 +60,18 @@ def replay(log_path: str) -> None:
     print("\n" + "=" * 52)
     if setup:
         gid = setup.get("game_id", "?")
+        ts  = setup.get("ts", "")
         print(f"  GAME  {gid}")
-        print(f"  Cop starts at {setup['cop']}   Thief starts at {setup['thief']}")
-        print(f"  Grid: {cols}x{rows}")
+        if ts:
+            print(f"  Time  : {ts}")
+        print(f"  Seed  : {setup.get('seed', '?')}")
+        print(f"  Grid  : {cols}x{rows}")
+        mech = setup.get("mechanics") or {}
+        if mech:
+            for k, v in mech.items():
+                print(f"  {k}: {v}")
+        print(f"  Cop starts at   {setup['cop']}")
+        print(f"  Thief starts at {setup['thief']}")
     print("=" * 52)
     if setup:
         print("\n" + _board(setup["cop"], setup["thief"], [], cols, rows))
@@ -112,13 +121,9 @@ def replay(log_path: str) -> None:
 def main() -> None:
     """Parse CLI argument and run the replay."""
     if len(sys.argv) < 2:
-        default = Path("hw6-common/games/server_a") / next(
-            (p.name for p in sorted(
-                (Path("hw6-common/games/server_a").glob("*/game.log")),
-                key=lambda p: p.stat().st_mtime, reverse=True,
-            ) if p.is_file()), "match0000/game.log"
-        )
-        log = str(default)
+        base = Path("hw6-common/games/server_a")
+        candidates = sorted(base.glob("*/game.log"), key=lambda p: p.stat().st_mtime, reverse=True)
+        log = str(candidates[0]) if candidates else str(base / "match0000/game.log")
         print(f"No log specified — using most recent: {log}")
     else:
         log = sys.argv[1]
