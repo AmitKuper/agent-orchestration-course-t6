@@ -56,12 +56,14 @@ This induces **belief uncertainty** on both sides — a hallmark of the DecPOMDP
 │          │  PRD §6: LLM lives here, not in server    │
 └──────────┼──────────────────────────────────────────┘
            │ FastMCP Client (BearerAuth)
-    ┌──────┴──────┐            ┌──────────────┐
-    │ MCP Server A│            │ MCP Server B │
-    │  port 8001  │◄──────────►│  port 8002   │
-    │  (Thief)    │  HTTP REST │  (Cop)       │
-    └─────────────┘            └──────────────┘
-    Tools: get_state, take_action, get_actor_action
+    ┌──────┴──────┐   MCP JSON-RPC    ┌──────────────┐
+    │ MCP Server A│◄─────────────────►│ MCP Server B │
+    │  port 8001  │  receive_action   │  port 8002   │
+    │  (Thief)    │  get_hash         │  (Cop)       │
+    └─────────────┘  propose_match    └──────────────┘
+    Tools: get_state, take_action, get_actor_action,
+           receive_action, get_hash, propose_match_tool,
+           send_game_summary
     Prompts: cop_rules / thief_rules
     Resources: game://config, game://{id}/state/{actor}
 ```
@@ -77,13 +79,25 @@ The orchestrator implements the 3-step actor turn:
 
 This satisfies the exercise §5.2 requirement: *"שרת ה-MCP הוא רכיב נפרד החושף כלים בלבד"* (the MCP server is a separate component exposing tools only).
 
-### 2.3 Inter-Server Communication
+### 2.3 Inter-Server Communication (Full MCP Protocol)
 
-After each `take_action`:
-- Server A forwards the action to Server B via `POST /game/receive_action`
-- Server B applies it to its local game engine
-- Both engines compute `state_hash()` and compare via `GET /game/hash`
+After each `take_action`, server A calls server B using real MCP JSON-RPC (not REST):
+- `receive_action` tool → server B applies the action to its local engine
+- `get_hash` tool → both engines compare their `state_hash()` values
 - **Hash mismatch** → technical loss, sub-game void, automatic re-run
+
+All calls use `fastmcp.Client` with `BearerAuth`. No plain HTTP/REST routes remain.
+
+### 2.4 Natural-Language Communication
+
+Each turn, the orchestrator generates a contextual NL message:
+- If the opponent sent a message last turn, the LLM is prompted:
+  *"Opponent's last message: '…'. You chose to move {direction}. Describe your move and what you infer."*
+- The message travels with the action through `take_action` → `receive_action`
+- It is stored in `mcp_message_store` and injected into `get_state` responses as `opponent_last_message`
+- LLM-mode agents see the opponent's last message in their observation and can reason from it
+
+This implements the exercise §5.1 requirement: agents communicate in free natural language and the receiving agent uses the message to update its state assessment.
 
 ---
 
