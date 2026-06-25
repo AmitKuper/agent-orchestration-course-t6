@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-cop-thief-game = { path = "./hw6-common" }
+cop-thief-game = { path = "./hw6-common", editable = true }
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/actor_t6"]
