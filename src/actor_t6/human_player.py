@@ -18,7 +18,7 @@ import msvcrt
 from typing import TYPE_CHECKING
 
 from actor.base_actor import BaseActor
-from game.constants import BARRIER_ACTION, COP, THIEF
+from game.constants import BARRIER_ACTION, COP, STAY_ACTION, THIEF
 
 if TYPE_CHECKING:
     from game.state import ActionResult, ObservationState
@@ -39,9 +39,14 @@ _SCAN_MAP: dict[int, str] = {
     0x4F: "SW", 0x50: "S",  0x51: "SE",   # End  / Down / PgDn
 }
 
-_CONTROLS = (
+_CONTROLS_COP = (
     "  Controls (numpad):  7=NW 8=N 9=NE\n"
     "                      4=W  5=BARRIER 6=E\n"
+    "                      1=SW 2=S 3=SE   q=quit"
+)
+_CONTROLS_THIEF = (
+    "  Controls (numpad):  7=NW 8=N 9=NE\n"
+    "                      4=W  5=STAY  6=E\n"
     "                      1=SW 2=S 3=SE   q=quit"
 )
 
@@ -74,11 +79,14 @@ class HumanPlayer(BaseActor):
             SystemExit: If the user presses 'q'.
         """
         self._render(obs)
-        print(_CONTROLS)
+        print(_CONTROLS_THIEF if self.role == THIEF else _CONTROLS_COP)
         print("  Press a numpad key: ", end="", flush=True)
         legal = obs.legal_moves
         while True:
             action = self._read_action()
+            # Remap BARRIER key to STAY when playing as thief.
+            if action == BARRIER_ACTION and self.role == THIEF:
+                action = STAY_ACTION
             if action == "QUIT":
                 print("\n  Quitting game.")
                 raise SystemExit(0)

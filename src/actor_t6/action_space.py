@@ -8,8 +8,8 @@ from __future__ import annotations
 
 import numpy as np
 
-# Fixed order: 8 directions in DIRECTIONS dict key order, then BARRIER.
-ACTION_LIST: list[str] = ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "BARRIER"]
+# Fixed order: 8 directions, then BARRIER (cop), then STAY (thief).
+ACTION_LIST: list[str] = ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "BARRIER", "STAY"]
 NUM_ACTIONS: int = len(ACTION_LIST)
 
 _ACTION_TO_IDX: dict[str, int] = {a: i for i, a in enumerate(ACTION_LIST)}

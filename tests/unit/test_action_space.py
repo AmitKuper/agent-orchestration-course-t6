@@ -13,8 +13,8 @@ from actor_t6.action_space import (
 
 
 def test_num_actions() -> None:
-    """ACTION_LIST must contain exactly 9 actions."""
-    assert NUM_ACTIONS == 9
+    """ACTION_LIST must contain exactly 10 actions (8 dirs + BARRIER + STAY)."""
+    assert NUM_ACTIONS == 10
 
 
 def test_round_trip_all_actions() -> None:
@@ -23,8 +23,13 @@ def test_round_trip_all_actions() -> None:
         assert idx_to_action(action_to_idx(action)) == action
 
 
-def test_barrier_is_last() -> None:
-    """BARRIER must be the last action (index 8)."""
+def test_stay_is_last() -> None:
+    """STAY must be the last action (index 9)."""
+    assert action_to_idx("STAY") == 9
+
+
+def test_barrier_index() -> None:
+    """BARRIER must be at index 8."""
     assert action_to_idx("BARRIER") == 8
 
 

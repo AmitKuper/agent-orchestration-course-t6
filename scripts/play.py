@@ -90,6 +90,7 @@ def play() -> None:
     )
 
     done = False
+    final_result = None
     while not done:
         for role, backend, is_human in turn_order:
             obs = game.get_state(role)
@@ -101,8 +102,15 @@ def play() -> None:
             result = game.submit_action(role, action)
             backend.on_result(obs, action, result)
             if result.game_over:
+                final_result = result
                 done = True
                 break
+
+    if final_result:
+        winner = final_result.winner
+        you_win = winner == human_role
+        label = "You win!" if you_win else "Actor wins!"
+        print(f"\n  === Game over: {winner.upper()} wins ({final_result.win_reason}). {label} ===")
 
 
 if __name__ == "__main__":
