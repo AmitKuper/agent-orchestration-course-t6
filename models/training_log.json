@@ -1,0 +1,82 @@
+[
+  {
+    "episode": 10000,
+    "cop_win_rate": 0.671
+  },
+  {
+    "episode": 20000,
+    "cop_win_rate": 0.796
+  },
+  {
+    "episode": 30000,
+    "cop_win_rate": 0.815
+  },
+  {
+    "episode": 40000,
+    "cop_win_rate": 0.838
+  },
+  {
+    "episode": 50000,
+    "cop_win_rate": 0.862
+  },
+  {
+    "episode": 60000,
+    "cop_win_rate": 0.868
+  },
+  {
+    "episode": 70000,
+    "cop_win_rate": 0.905
+  },
+  {
+    "episode": 80000,
+    "cop_win_rate": 0.913
+  },
+  {
+    "episode": 90000,
+    "cop_win_rate": 0.919
+  },
+  {
+    "episode": 100000,
+    "cop_win_rate": 0.957
+  },
+  {
+    "episode": 110000,
+    "cop_win_rate": 0.962
+  },
+  {
+    "episode": 120000,
+    "cop_win_rate": 0.964
+  },
+  {
+    "episode": 130000,
+    "cop_win_rate": 0.975
+  },
+  {
+    "episode": 140000,
+    "cop_win_rate": 0.991
+  },
+  {
+    "episode": 150000,
+    "cop_win_rate": 0.986
+  },
+  {
+    "episode": 160000,
+    "cop_win_rate": 0.987
+  },
+  {
+    "episode": 170000,
+    "cop_win_rate": 0.97
+  },
+  {
+    "episode": 180000,
+    "cop_win_rate": 0.981
+  },
+  {
+    "episode": 190000,
+    "cop_win_rate": 0.99
+  },
+  {
+    "episode": 200000,
+    "cop_win_rate": 0.993
+  }
+]

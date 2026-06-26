@@ -10,9 +10,7 @@ build/
 # Environment
 .env
 
-# Trained models (large binary files)
-models/*.npy
-models/training_log.json
+# Trained models: weights ARE tracked so the actor ships ready-to-play.
 
 # Pytest / coverage
 .pytest_cache/
