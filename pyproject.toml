@@ -21,6 +21,7 @@ packages = ["src/actor_t6"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+exclude = ["hw6-common"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "ANN", "D"]

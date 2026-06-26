@@ -18,7 +18,14 @@ class GroupAActor(BaseActor):
 
 ## 3. Strategy
 
-_To be defined._
+The Actor uses **tabular Q-learning** with separate Q-tables for each role:
+
+- **CopActor**: trained to minimise rounds-to-capture via positive reward on capture (+20) and step penalty (−0.1) that drives urgency.
+- **ThiefActor**: trained to maximise survival duration via per-step reward (+0.1) and large bonus for surviving all rounds (+10).
+
+State encoding: `(my_pos, opp_pos, barrier_mask)` → integer index over 332,800 states.
+ε-greedy exploration decays from 1.0 → 0.05 over 200,000 self-play episodes.
+At inference time ε = 0 (pure greedy). Q-tables persisted as `.npy` files.
 
 ## 4. Input / Output Contract
 
