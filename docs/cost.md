@@ -40,6 +40,21 @@
 
 **Phase 3 total:** ~1,100 input / ~1,100 output (~2,200 tokens)
 
+## Phase 4 — Code Quality & ex06 Compliance
+
+| Step | Input tokens | Output tokens | Notes |
+|------|-------------|---------------|-------|
+| File split refactor (150-line rule) | ~80,000 | ~12,000 | run_match→match_helpers, gatekeeper, mcp_tools, persistence, game.py |
+| PLAYER_NAMES / students field | ~5,000 | ~800 | Parse env var, populate report |
+| Game log embedding in report | ~4,000 | ~600 | _read_game_log → sub_games[].log |
+| Gatekeeper test mock fix | ~3,000 | ~400 | httpx.Client.post vs httpx.post |
+| grid_renderer.py extraction | ~2,000 | ~300 | human_player → grid_renderer |
+| demo_chat + game_host splits | ~6,000 | ~1,200 | 150-line compliance for scripts |
+| test_game split + win tests | ~2,000 | ~300 | test_game_win.py extracted |
+| Ruff fixes across codebase | ~5,000 | ~500 | Zero violations maintained |
+
+**Phase 4 total:** ~107,000 input / ~16,100 output (~123,100 tokens)
+
 ## Cumulative Total
 
 | Phase | Total tokens |
@@ -47,7 +62,8 @@
 | Phase 1 — Scaffold | ~10,000 |
 | Phase 2 — Infrastructure | ~16,100 |
 | Phase 3 — Docs | ~2,200 |
-| **Grand total** | **~28,300** |
+| Phase 4 — Quality & ex06 | ~123,100 |
+| **Grand total** | **~151,400** |
 
 ## LLM Game Commentary Cost (OpenRouter — DeepSeek v3.2)
 

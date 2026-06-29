@@ -77,6 +77,19 @@
 - [x] Gmail reports sent automatically to GMAIL_RECIPIENT at end of series
 - [x] `docs/ex06.md` + `scripts/start_local_server.ps1` committed
 
+## Code Quality (150-line rule) — ✅ Complete (commit 72e7cd0)
+
+- [x] `run_match.py` (920→66 lines) split into `scripts/match_helpers/` package (9 modules)
+- [x] `gatekeeper.py` → extracted `llm_backends.py`
+- [x] `mcp_tool_format.py` → extracted `mcp_tool_results.py`
+- [x] `mcp_agent_tools.py` → extracted `mcp_game_tool_schemas.py`, `mcp_opponent_caller.py`
+- [x] `persistence.py` → extracted `log_writer.py`
+- [x] `game.py` → extracted `game_observer.py`
+- [x] `demo_chat.py` → extracted `demo_chat_runner.py`
+- [x] `game_host.py` → extracted `game_host_runner.py`
+- [x] `test_game.py` → extracted `test_game_win.py`
+- [x] Zero ruff violations, 226 tests passing
+
 ---
 
 ## Remaining / Lower Priority
