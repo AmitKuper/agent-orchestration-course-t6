@@ -73,6 +73,7 @@
 - [x] Verified two local MCP servers (ports 8001 + 8002) run and play autonomously
 - [x] Ollama `gemma3:4b` used for NL messages — GPU confirmed (RTX 3090 24 GB)
 - [x] `students` field in JSON report populated from `PLAYER_NAMES` env var
+- [x] `log` field (full turn-by-turn JSON) embedded in each `sub_games` entry of the report
 - [x] Gmail reports sent automatically to GMAIL_RECIPIENT at end of series
 - [x] `docs/ex06.md` + `scripts/start_local_server.ps1` committed
 
