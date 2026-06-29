@@ -68,6 +68,16 @@
 
 ---
 
+## Local Two-Server Ollama Test — ✅ Complete
+
+- [x] Verified two local MCP servers (ports 8001 + 8002) run and play autonomously
+- [x] Ollama `gemma3:4b` used for NL messages — GPU confirmed (RTX 3090 24 GB)
+- [x] `students` field in JSON report populated from `PLAYER_NAMES` env var
+- [x] Gmail reports sent automatically to GMAIL_RECIPIENT at end of series
+- [x] `docs/ex06.md` + `scripts/start_local_server.ps1` committed
+
+---
+
 ## Remaining / Lower Priority
 - [ ] Sensitivity analysis notebook (`notebooks/sensitivity_analysis.ipynb`)
 - [ ] Architecture diagram image in `assets/`
