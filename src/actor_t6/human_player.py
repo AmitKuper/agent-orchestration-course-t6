@@ -18,12 +18,12 @@ import msvcrt
 from typing import TYPE_CHECKING
 
 from actor.base_actor import BaseActor
-from game.constants import BARRIER_ACTION, COP, STAY_ACTION, THIEF
+from game.constants import BARRIER_ACTION, STAY_ACTION, THIEF
+
+from actor_t6.grid_renderer import render_observation
 
 if TYPE_CHECKING:
     from game.state import ActionResult, ObservationState
-
-_SYMBOLS = {COP: "C", THIEF: "T"}
 
 # NumLock ON: numpad sends ASCII digits.
 _CHAR_MAP: dict[str, str] = {
@@ -131,35 +131,9 @@ class HumanPlayer(BaseActor):
         return _CHAR_MAP.get(char)
 
     def _render(self, obs: ObservationState) -> None:
-        """Print the current grid state to stdout.
+        """Delegate grid rendering to grid_renderer.render_observation.
 
         Args:
             obs: Current observation; positions determine cell symbols.
         """
-        cols = max(obs.my_pos[0], *(b[0] for b in obs.barriers), 0,
-                   *([] if obs.opponent_pos is None else [obs.opponent_pos[0]])) + 1
-        rows = max(obs.my_pos[1], *(b[1] for b in obs.barriers), 0,
-                   *([] if obs.opponent_pos is None else [obs.opponent_pos[1]])) + 1
-        cols, rows = max(cols, 5), max(rows, 5)
-
-        cop_pos = obs.my_pos if obs.actor == COP else obs.opponent_pos
-        thief_pos = obs.my_pos if obs.actor == THIEF else obs.opponent_pos
-        barriers = set(map(tuple, obs.barriers))
-
-        br = (f"  Barriers left: {obs.barriers_remaining}"
-              if obs.barriers_remaining is not None else "")
-        print(f"\n  Round {obs.round} | You: {obs.actor.upper()} ({_SYMBOLS[obs.actor]})"
-              f"  Opponent: {'?' if obs.opponent_pos is None else str(obs.opponent_pos)}{br}")
-        print("    " + " ".join(str(c) for c in range(cols)))
-        for r in range(rows):
-            row_str = []
-            for c in range(cols):
-                if cop_pos == (c, r):
-                    row_str.append("C")
-                elif thief_pos == (c, r):
-                    row_str.append("T")
-                elif (c, r) in barriers:
-                    row_str.append("#")
-                else:
-                    row_str.append(".")
-            print(f"  {r} {' '.join(row_str)}")
+        render_observation(obs)
