@@ -20,9 +20,9 @@ sys.path.insert(0, str(_ROOT / "src"))
 sys.path.insert(0, str(_ROOT / "hw6-common" / "src"))
 sys.path.insert(0, str(_ROOT / "scripts"))
 
-from actor_t6.qtable_actor import QTableActor  # noqa: E402
-
 from train import _load_config, _print_progress, _run_episode  # noqa: E402
+
+from actor_t6.qtable_actor import QTableActor  # noqa: E402
 
 
 def train_thief(num_episodes: int | None = None) -> None:
