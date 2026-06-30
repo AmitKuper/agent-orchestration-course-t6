@@ -247,7 +247,9 @@ The `game://config` MCP resource exposes this file to the LLM client at runtime.
 ### 7.3 Test Coverage
 
 ```
-Tests: 185 passed | Coverage: 97% | Ruff: 0 violations
+hw6-common:  226 passed | Coverage: 85.2% | Ruff: 0 violations
+actor_t6:     54 passed | Coverage: 99%   | Ruff: 0 violations
+Total:        280 passed
 ```
 
 Key test modules validating MCP operation:
@@ -334,7 +336,42 @@ hw6-group-a/
 
 ---
 
-## 10. References
+## 10. Contribution Guidelines
+
+This repository contains Group A's private implementation (Part 5 — Actor).
+The shared infrastructure (Parts 1–4) lives in the `hw6-common` submodule.
+
+**To contribute to the Actor (Part 5):**
+1. Branch off `main`: `git checkout -b feature/<name>`
+2. Follow commit conventions: `Feature:` / `BugFix:` / `Refactor:` / `Docs:`
+3. Ensure `uv run ruff check .` reports zero violations
+4. Ensure `uv run pytest` passes all tests
+5. Update `docs/TODO.md` and `docs/cost.md` in the same commit
+6. Open a PR targeting `main`; one review approval required
+
+**To update the shared submodule:**
+```bash
+cd hw6-common && git pull origin main && cd ..
+git add hw6-common && git commit -m "Docs: bump hw6-common submodule"
+```
+
+**Never push directly to `hw6-common/`** — it is a read-only reference managed by the shared team.
+
+---
+
+## 11. License & Credits
+
+**Course:** AI Agent Orchestration — Computer Science Department, University of Haifa  
+**Instructor:** Dr. Yoram Segal  
+**Assignment:** Task 6 (HW6), June 2026  
+**Group:** Group A (Team 6)
+
+This project is submitted as coursework and is not licensed for redistribution.
+All rights to the exercise specification and course materials are reserved by Dr. Yoram Segal.
+
+---
+
+## 12. References
 
 - Model Context Protocol specification: https://modelcontextprotocol.io/
 - FastMCP library: https://gofastmcp.com/
